@@ -1,0 +1,29 @@
+{
+    "job_description": "Meta is seeking talented engineers to join our teams in building cutting-edge products that connect billions of people around the world. As a member of our team, you will have the opportunity to work on complex technical problems, build new features, and improve existing products across various platforms, including mobile devices and web applications. Our teams are constantly pushing the boundaries of user experience, and we're looking for passionate individuals who can help us advance the way people connect globally. If you're interested in joining a world-class team of engineers and researchers to work on exciting projects that have significant impact, we encourage you to apply.",
+    "job_title": "Software Engineer, Machine Learning",
+    "job_location": "London, UK",
+    "job_salary": "£100,000 - £120,000 per year",
+    "job_requirements": [
+        "Programming experience in a relevant language",
+        "Bachelor's degree in Computer Science, Computer Engineering, relevant technical field, or equivalent practical experience",
+        "Demonstrated experience driving change within an organization and leading complex technical projects",
+        "Experience utilizing data and analysis to explain technical problems and provide detailed feedback and solutions"
+    ],
+    "programming_languages": [
+        "Python",
+        "Java",
+        "C++",
+        "JavaScript",
+        "SQL"
+    ],
+    "frameworks": [
+        "TensorFlow",
+        "PyTorch",
+        "Scikit-learn"
+    ],
+    "tools": [
+        "Git",
+        "Docker",
+        "Kubernetes"
+    ]
+}

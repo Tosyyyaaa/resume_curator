@@ -1,0 +1,33 @@
+Meta is seeking talented engineers to join our teams in building cutting-edge products that connect billions of people around the world. As a member of our team, you will have the opportunity to work on complex technical problems, build new features, and improve existing products across various platforms, including mobile devices and web applications. Our teams are constantly pushing the boundaries of user experience, and we're looking for passionate individuals who can help us advance the way people connect globally. If you're interested in joining a world-class team of engineers and researchers to work on exciting projects that have significant impact, we encourage you to apply.
+Software Engineer, Machine Learning Responsibilities
+Collaborate with cross-functional teams (product, design, operations, infrastructure) to build innovative application experiences
+
+Implement custom user interfaces using latest programming techniques and technologies
+Analyze and optimize code for quality, efficiency, and performance, and provide feedback to peers during code reviews
+Set direction and goals for teams, lead major initiatives, provide technical guidance and mentorship to peers, and help onboard new team members
+Architect efficient and scalable systems that drive complex applications
+Identify and resolve performance and scalability issues, and drive large efforts to reduce technical debt
+Work on a variety of coding languages and technologies
+Establish ownership of components, features, or systems with expert end-to-end understanding
+
+Minimum Qualifications
+Programming experience in a relevant language
+Bachelor's degree in Computer Science, Computer Engineering, relevant technical field, or equivalent practical experience
+Demonstrated experience driving change within an organization and leading complex technical projects
+Experience utilizing data and analysis to explain technical problems and provide detailed feedback and solutions
+
+Preferred Qualifications
+Masters degree or PhD in Computer Science or a related technical field
+Experience with frameworks like TensorFlow, PyTorch, or Scikit-learn
+Knowledge of NLP techniques, including text preprocessing, tokenization, and sentiment analysis
+Understanding of information retrieval concepts, such as indexing, querying, and ranking
+Demonstrated experience with data structures and algorithms, including graph theory and optimization techniques
+
+About Meta
+Meta builds technologies that help people connect, find communities, and grow businesses. When Facebook launched in 2004, it changed the way people connect. Apps like Messenger, Instagram and WhatsApp further empowered billions around the world. Now, Meta is moving beyond 2D screens toward immersive experiences like augmented and virtual reality to help build the next evolution in social technology. People who choose to build their careers by building with us at Meta help shape a future that will take us beyond what digital connection makes possible today—beyond the constraints of screens, the limits of distance, and even the rules of physics.
+
+
+
+Equal Employment Opportunity
+Meta is proud to be an Equal Employment Opportunity employer. We do not discriminate based upon race, religion, color, national origin, sex (including pregnancy, childbirth, reproductive health decisions, or related medical conditions), sexual orientation, gender identity, gender expression, age, status as a protected veteran, status as an individual with a disability, genetic information, political views or activity, or other applicable legally protected characteristics. You may view our Equal Employment Opportunity notice here.
+Meta is committed to providing reasonable accommodations for qualified individuals with disabilities and disabled veterans in our job application procedures. If you need assistance or an accommodation due to a disability, fill out the Accommodations request form.

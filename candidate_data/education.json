@@ -1,0 +1,37 @@
+{
+    "university_education": [
+        {
+            "school": "University of California, Los Angeles",
+            "degree": "B.Sc. in Computer Science",
+            "start_date": "2020",
+            "end_date": "2024",
+            "grade": "3.8/4.0",
+            "courses": ["Computational Linguistics", "Computer Vision", "Machine Learning", "Natural Language Processing"]
+        },
+        {
+            "school": "University of Cambridge",
+            "degree": "M.Sc. in Machine Learning",
+            "start_date": "2024",
+            "end_date": "2025",
+            "grade": "Distinction (80%)",
+            "courses": ["Introduction to Machine Learning", "Deep Learning", "Computer Vision", "Natural Language Processing"]
+        }
+    ],
+    "high_school_education": [
+        {
+            "school": "St. John's College",
+            "degree": "A-Levels",
+            "start_date": "2017",
+            "end_date": "2019",
+            "grade": "A*A*A*A*"
+        }
+    ],
+    "other_education": [
+        {
+            "school": "Code Nation",
+            "degree": "Python Programming",
+            "start_date": "2020",
+            "end_date": "2021"
+        }
+    ]
+}

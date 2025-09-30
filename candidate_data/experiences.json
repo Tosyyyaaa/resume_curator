@@ -1,0 +1,28 @@
+{
+    "work_experience": [
+        {
+            "company": "Meta",
+            "title": "Meta Engineer",
+            "start_date": "2024",
+            "end_date": "2025",
+            "description": "Increased user engagement by 200% using reinforcement learning"
+        }
+    ],
+    "internship_experience": [
+        {
+            "company": "Meta",
+            "title": "Meta Intern",
+            "start_date": "2024",
+            "end_date": "2025",
+            "description": "Decreased instagram's load time by 50% using distributed systems"
+        }
+    ],
+    "competitions": [
+        {
+            "name": "Meta AI Challenge",
+            "description": "Won first place in the Meta AI Challenge using a transformer model",
+            "start_date": "2020",
+            "end_date": "2021"
+        }
+    ]
+}
