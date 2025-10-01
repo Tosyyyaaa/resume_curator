@@ -2,9 +2,12 @@
     "projects": [
         {
             "name": "Image Captioning",
-            "description": "Image captioning using a transformer model, 90% accuracy against HumanEval benchmark",
+            "description": ["Image captioning using a transformer model, 90% accuracy against HumanEval benchmark"],
             "start_date": "2020",
-            "end_date": "2021"
+            "end_date": "2021",
+            "languages": ["Python"],
+            "frameworks": ["PyTorch, CV2"],
+            "tools": []
         }
     ]
 }

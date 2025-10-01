@@ -5,7 +5,10 @@
             "title": "Meta Engineer",
             "start_date": "2024",
             "end_date": "2025",
-            "description": "Increased user engagement by 200% using reinforcement learning"
+            "description": ["Increased user engagement by 200% using reinforcement learning"],
+            "languages": ["Rust", "HTML", "CSS", "JavaScript"],
+            "frameworks": ["React", "Node.js", "Express.js"],
+            "tools": ["Git", "Docker", "Kubernetes"]
         }
     ],
     "internship_experience": [
@@ -14,15 +17,21 @@
             "title": "Meta Intern",
             "start_date": "2024",
             "end_date": "2025",
-            "description": "Decreased instagram's load time by 50% using distributed systems"
+            "description": ["Decreased instagram's load time by 50% using distributed systems"],
+            "languages": ["Rust", "Golang"],
+            "frameworks": ["Tokio", "Django", "FastAPI"],
+            "tools": ["Git", "Docker", "AWS"]
         }
     ],
     "competitions": [
         {
             "name": "Meta AI Challenge",
-            "description": "Won first place in the Meta AI Challenge using a transformer model",
+            "description": ["Won first place in the Meta AI Challenge using a transformer model"],
             "start_date": "2020",
-            "end_date": "2021"
+            "end_date": "2021",
+            "languages": ["Python"],
+            "frameworks": ["PyTorch, CV2"],
+            "tools": ["Git", "Docker", "AWS"]
         }
     ]
 }
