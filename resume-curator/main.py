@@ -40,30 +40,48 @@ def extract_header(candidate_data: CandidateData) -> ResumeHeader:
     return ResumeHeader.from_metadata(candidate_data.metadata)
 
 
-def extract_experiences(candidate_data: CandidateData) -> list[ExtractedJobExperience]:
-    """Extract all job experiences from candidate data.
+def extract_experiences(
+    candidate_data: CandidateData, job_description: JobDescription, use_llm: bool = True
+) -> list[ExtractedJobExperience]:
+    """Extract all job experiences from candidate data, ranked by relevance.
 
     Args:
         candidate_data: Loaded candidate data
+        job_description: Parsed job description with requirements
+        use_llm: Whether to use LLM optimization for long bullets (default: True)
 
     Returns:
-        List of ExtractedJobExperience instances
+        List of ExtractedJobExperience instances sorted by relevance_score (descending)
     """
     experiences = []
 
     # Add work experience
     for exp in candidate_data.experiences.get("work_experience", []):
-        experiences.append(ExtractedJobExperience.from_experience_dict(exp))
+        experiences.append(
+            ExtractedJobExperience.from_experience_dict_with_score(exp, job_description)
+        )
 
     # Add internship experience
     for exp in candidate_data.experiences.get("internship_experience", []):
-        experiences.append(ExtractedJobExperience.from_experience_dict(exp))
+        experiences.append(
+            ExtractedJobExperience.from_experience_dict_with_score(exp, job_description)
+        )
 
     # Add competitions
     for comp in candidate_data.experiences.get("competitions", []):
         experiences.append(
-            ExtractedJobExperience.from_experience_dict(comp, is_competition=True)
+            ExtractedJobExperience.from_experience_dict_with_score(
+                comp, job_description, is_competition=True
+            )
         )
+
+    # Sort by relevance score (descending), maintaining relative order for same scores
+    experiences.sort(key=lambda e: e.relevance_score, reverse=True)
+
+    # Optimize bullets with LLM if enabled and needed
+    if use_llm:
+        for exp in experiences:
+            exp.optimize_bullets_with_llm(max_chars_per_bullet=80)
 
     return experiences
 
@@ -94,19 +112,33 @@ def extract_education(candidate_data: CandidateData) -> list[ExtractedEducation]
     return education
 
 
-def extract_projects(candidate_data: CandidateData) -> list[ExtractedProject]:
-    """Extract all projects from candidate data.
+def extract_projects(
+    candidate_data: CandidateData, job_description: JobDescription, use_llm: bool = True
+) -> list[ExtractedProject]:
+    """Extract all projects from candidate data, ranked by relevance.
 
     Args:
         candidate_data: Loaded candidate data
+        job_description: Parsed job description with requirements
+        use_llm: Whether to use LLM optimization for long descriptions (default: True)
 
     Returns:
-        List of ExtractedProject instances
+        List of ExtractedProject instances sorted by relevance_score (descending)
     """
     projects = []
 
     for proj in candidate_data.projects.get("projects", []):
-        projects.append(ExtractedProject.from_project_dict(proj))
+        projects.append(
+            ExtractedProject.from_project_dict_with_score(proj, job_description)
+        )
+
+    # Sort by relevance score (descending), maintaining relative order for same scores
+    projects.sort(key=lambda p: p.relevance_score, reverse=True)
+
+    # Optimize descriptions with LLM if enabled and needed
+    if use_llm:
+        for proj in projects:
+            proj.optimize_description_with_llm(max_chars=80)
 
     return projects
 
@@ -139,6 +171,7 @@ def generate_pending_resume(
     job_description: JobDescription,
     candidate_data: CandidateData,
     page_limit: int,
+    use_llm: bool = True,
 ) -> PendingResume:
     """Generate a page-constrained resume from candidate data and job description.
 
@@ -146,15 +179,16 @@ def generate_pending_resume(
         job_description: Parsed job description
         candidate_data: Loaded candidate data
         page_limit: Maximum number of pages
+        use_llm: Whether to use LLM optimization for long bullets (default: True)
 
     Returns:
         PendingResume instance that fits within page limit
     """
     # Extract all components
     header = extract_header(candidate_data)
-    experiences = extract_experiences(candidate_data)
+    experiences = extract_experiences(candidate_data, job_description, use_llm=use_llm)
     education = extract_education(candidate_data)
-    projects = extract_projects(candidate_data)
+    projects = extract_projects(candidate_data, job_description, use_llm=use_llm)
     skills = extract_skills(candidate_data, job_description)
 
     # Create PendingResume with page limit
@@ -215,6 +249,11 @@ def main() -> None:
         default="json",
         help="Output format (default: json)",
     )
+    parser.add_argument(
+        "--no-llm",
+        action="store_true",
+        help="Disable LLM-based bullet point optimization (for offline use)",
+    )
 
     args = parser.parse_args()
 
@@ -235,9 +274,13 @@ def main() -> None:
         sys.exit(1)
 
     # Generate resume
+    use_llm = not args.no_llm
+    if not use_llm:
+        print("LLM optimization disabled (running in offline mode)")
+
     try:
         resume = generate_pending_resume(
-            job_description, candidate_data, args.page_limit
+            job_description, candidate_data, args.page_limit, use_llm=use_llm
         )
 
         print(f"\nResume Summary:")

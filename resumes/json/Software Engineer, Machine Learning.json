@@ -18,17 +18,8 @@
             "description_bullets": [
                 "Increased user engagement by 200% using reinforcement learning"
             ],
-            "line_length": 2
-        },
-        {
-            "company": "Meta",
-            "title": "Meta Intern",
-            "start_date": "2024",
-            "end_date": "2025",
-            "description_bullets": [
-                "Decreased instagram's load time by 50% using distributed systems"
-            ],
-            "line_length": 2
+            "line_length": 2,
+            "relevance_score": 4
         },
         {
             "company": "Meta AI Challenge",
@@ -38,7 +29,19 @@
             "description_bullets": [
                 "Won first place in the Meta AI Challenge using a transformer model"
             ],
-            "line_length": 2
+            "line_length": 2,
+            "relevance_score": 3
+        },
+        {
+            "company": "Meta",
+            "title": "Meta Intern",
+            "start_date": "2024",
+            "end_date": "2025",
+            "description_bullets": [
+                "Decreased instagram's load time by 50% using distributed systems"
+            ],
+            "line_length": 2,
+            "relevance_score": 2
         }
     ],
     "education": [
@@ -95,7 +98,8 @@
             "description": "Image captioning using a transformer model, 90% accuracy against HumanEval benchmark",
             "start_date": "2020",
             "end_date": "2021",
-            "line_length": 3
+            "line_length": 3,
+            "relevance_score": 1
         }
     ],
     "skills": {

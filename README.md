@@ -56,12 +56,25 @@ This will generate a parsed JSON file in `job_descriptions/parsed/` with the sam
 
 3. **Generate the resume**: Using the parsed JSON from step 2, run:
 
+Option a (with llm):
+
 ```bash
 python3 resume-curator/main.py \
   --job-description job_descriptions/parsed/meta_engineer.json \
   --candidate-data candidate_data \
   --page-limit 1 \
   --output-format json
+```
+
+Option b (no llm):
+
+```bash
+python3 resume-curator/main.py \
+  --job-description job_descriptions/parsed/meta_engineer.json \
+  --candidate-data candidate_data \
+  --page-limit 1 \
+  --output-format json \
+  --no-llm
 ```
 
 Replace `meta_engineer.json` with your parsed job description filename from step 2.

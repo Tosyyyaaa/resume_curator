@@ -207,3 +207,94 @@ class TestExtractedJobExperience:
 
         with pytest.raises(KeyError, match="company"):
             ExtractedJobExperience.from_experience_dict(experience)
+
+    def test_default_relevance_score_is_zero(self, sample_experience):
+        """Test that default relevance score is 0."""
+        exp = ExtractedJobExperience.from_experience_dict(sample_experience)
+        assert exp.relevance_score == 0
+
+    def test_relevance_score_can_be_set(self, sample_experience):
+        """Test that relevance score can be provided."""
+        exp = ExtractedJobExperience.from_experience_dict(
+            sample_experience, relevance_score=5
+        )
+        assert exp.relevance_score == 5
+
+    def test_to_dict_includes_relevance_score(self, sample_experience):
+        """Test that to_dict includes relevance_score."""
+        exp = ExtractedJobExperience.from_experience_dict(
+            sample_experience, relevance_score=3
+        )
+        exp_dict = exp.to_dict()
+        assert "relevance_score" in exp_dict
+        assert exp_dict["relevance_score"] == 3
+
+    def test_from_experience_dict_with_score(self, sample_experience):
+        """Test creating experience with calculated score."""
+
+        class MockJobDescription:
+            programming_languages = ["Python", "Rust"]
+            frameworks = ["React", "Django"]
+            tools = ["Git", "Docker"]
+
+        # Add tech fields to experience
+        sample_experience["languages"] = ["Python", "JavaScript"]
+        sample_experience["frameworks"] = ["React"]
+        sample_experience["tools"] = ["Git"]
+
+        job_desc = MockJobDescription()
+        exp = ExtractedJobExperience.from_experience_dict_with_score(
+            sample_experience, job_desc
+        )
+
+        # Should score: 1 (Python) + 1 (React) + 1 (Git) = 3
+        assert exp.relevance_score == 3
+
+    def test_description_as_list(self):
+        """Test handling description as list format."""
+        experience = {
+            "company": "TechCo",
+            "title": "Engineer",
+            "start_date": "2020",
+            "end_date": "2021",
+            "description": [
+                "Improved performance by 50%",
+                "Led team of 5 engineers",
+                "Deployed to production"
+            ],
+        }
+        exp = ExtractedJobExperience.from_experience_dict(experience)
+
+        assert len(exp.description_bullets) == 3
+        assert "Improved performance by 50%" in exp.description_bullets
+        assert "Led team of 5 engineers" in exp.description_bullets
+        assert "Deployed to production" in exp.description_bullets
+
+    def test_description_list_with_empty_strings(self):
+        """Test that empty strings in list are filtered out."""
+        experience = {
+            "company": "TechCo",
+            "title": "Engineer",
+            "start_date": "2020",
+            "end_date": "2021",
+            "description": ["First bullet", "", "  ", "Second bullet"],
+        }
+        exp = ExtractedJobExperience.from_experience_dict(experience)
+
+        assert len(exp.description_bullets) == 2
+        assert "First bullet" in exp.description_bullets
+        assert "Second bullet" in exp.description_bullets
+
+    def test_backward_compatibility_string_description(self):
+        """Test backward compatibility with string description format."""
+        experience = {
+            "company": "OldCo",
+            "title": "Dev",
+            "start_date": "2019",
+            "end_date": "2020",
+            "description": "Bullet one\nBullet two\nBullet three",
+        }
+        exp = ExtractedJobExperience.from_experience_dict(experience)
+
+        assert len(exp.description_bullets) == 3
+        assert "Bullet one" in exp.description_bullets

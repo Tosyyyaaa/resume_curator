@@ -22,6 +22,7 @@ class ExtractedJobExperience:
         end_date: End year, date, or "Present"
         description_bullets: List of achievement/responsibility bullet points
         line_length: Number of lines this entry occupies (1 + bullet lines)
+        relevance_score: Score indicating relevance to job requirements (default 0)
     """
 
     company: str
@@ -30,6 +31,7 @@ class ExtractedJobExperience:
     end_date: str
     description_bullets: list[str]
     line_length: int = 0
+    relevance_score: int = 0
 
     def __post_init__(self) -> None:
         """Calculate line length after initialization."""
@@ -53,6 +55,51 @@ class ExtractedJobExperience:
             lines += bullet_lines
 
         return lines
+
+    def has_long_bullets(self, max_chars_per_bullet: int = 80) -> bool:
+        """Check if any bullets exceed the character limit.
+
+        Args:
+            max_chars_per_bullet: Maximum characters per bullet point
+
+        Returns:
+            True if any bullet exceeds the limit
+        """
+        return any(len(bullet) > max_chars_per_bullet for bullet in self.description_bullets)
+
+    def optimize_bullets_with_llm(self, max_chars_per_bullet: int = 80) -> None:
+        """Optimize bullets using LLM to compress and rank by importance.
+
+        Uses Gemini to:
+        - Compress long bullets to fit character limit
+        - Split bullets if needed to preserve information
+        - Rank bullets by importance
+
+        Args:
+            max_chars_per_bullet: Maximum characters per bullet point
+
+        Note:
+            This method modifies description_bullets in place
+        """
+        if not self.description_bullets:
+            return
+
+        # Only optimize if there are long bullets
+        if not self.has_long_bullets(max_chars_per_bullet):
+            return
+
+        from utils.bullet_optimizer import optimize_experience_bullets
+
+        try:
+            print(f"  Optimizing {len(self.description_bullets)} bullets for {self.company}...")
+            optimized = optimize_experience_bullets(
+                self.description_bullets, max_chars_per_bullet
+            )
+            self.description_bullets = optimized
+            self.line_length = self.calculate_line_length()
+        except Exception as e:
+            print(f"Warning: Failed to optimize bullets with LLM: {e}")
+            # Keep original bullets on failure
 
     def trim_to_lines(self, max_lines: int) -> None:
         """Trim description bullets to fit within line limit.
@@ -87,11 +134,15 @@ class ExtractedJobExperience:
             "end_date": self.end_date,
             "description_bullets": self.description_bullets,
             "line_length": self.line_length,
+            "relevance_score": self.relevance_score,
         }
 
     @classmethod
     def from_experience_dict(
-        cls, data: dict[str, Any], is_competition: bool = False
+        cls,
+        data: dict[str, Any],
+        is_competition: bool = False,
+        relevance_score: int = 0,
     ) -> "ExtractedJobExperience":
         """Create ExtractedJobExperience from experience dictionary.
 
@@ -99,6 +150,7 @@ class ExtractedJobExperience:
             data: Dictionary containing experience information
             is_competition: If True, uses "name" field for company and sets
                           title to "Competition"
+            relevance_score: Relevance score for this experience (default 0)
 
         Returns:
             ExtractedJobExperience instance
@@ -115,14 +167,19 @@ class ExtractedJobExperience:
             title = data["title"]
 
         # Parse description into bullet points
-        description = data.get("description", "")
-        if description:
-            # Split by newlines to create bullet points
+        description = data.get("description", [])
+
+        # Handle both list and string formats for backward compatibility
+        if isinstance(description, str):
+            # Legacy format: string with newlines
             bullets = [
                 bullet.strip()
                 for bullet in description.split("\n")
                 if bullet.strip()
             ]
+        elif isinstance(description, list):
+            # New format: already a list of bullet points
+            bullets = [bullet.strip() for bullet in description if bullet.strip()]
         else:
             bullets = []
 
@@ -132,4 +189,26 @@ class ExtractedJobExperience:
             start_date=data["start_date"],
             end_date=data["end_date"],
             description_bullets=bullets,
+            relevance_score=relevance_score,
+        )
+
+    @classmethod
+    def from_experience_dict_with_score(
+        cls, data: dict[str, Any], job_description: Any, is_competition: bool = False
+    ) -> "ExtractedJobExperience":
+        """Create ExtractedJobExperience with calculated relevance score.
+
+        Args:
+            data: Dictionary containing experience information
+            job_description: Job description object with requirements
+            is_competition: If True, uses "name" field for company
+
+        Returns:
+            ExtractedJobExperience instance with calculated relevance_score
+        """
+        from models.relevance_scorer import calculate_experience_score
+
+        score = calculate_experience_score(data, job_description)
+        return cls.from_experience_dict(
+            data, is_competition=is_competition, relevance_score=score
         )
