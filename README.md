@@ -29,6 +29,41 @@ The program will parse the data sources in order to generate a `n` page resume (
 
 ## Usage
 
-The binary takes a set of optional positional arguments that can be found using the `--help` flag.
+### Setup
 
-After running the curator, the output csvs will be found in the `resumes` directory.
+0. Create your `.env` file by copying over the `.env.example` and filling in the values.
+
+1. Create a virtual environment and install the requirements:
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate  # On Windows: .venv\Scripts\activate
+pip install -r requirements.txt
+```
+
+### Generating a Resume
+
+2. **Parse the job description**: Place your raw job description text file in `job_descriptions/raw/` (e.g., `job_descriptions/raw/meta_engineer.txt`), then run:
+
+```bash
+python3 job-description-parser/main.py --raw-file \
+ job_descriptions/raw/meta_engineer.txt
+```
+
+This will generate a parsed JSON file in `job_descriptions/parsed/` with the same name (e.g., `meta_engineer.json`).
+
+> **Tip**: Use `--help` to see additional optional arguments.
+
+3. **Generate the resume**: Using the parsed JSON from step 2, run:
+
+```bash
+python3 resume-curator/main.py \
+  --job-description job_descriptions/parsed/meta_engineer.json \
+  --candidate-data candidate_data \
+  --page-limit 1 \
+  --output-format json
+```
+
+Replace `meta_engineer.json` with your parsed job description filename from step 2.
+
+After running the curator, the output resume will be found in the `resumes/` directory. The filename will match the job title from the parsed job description.
