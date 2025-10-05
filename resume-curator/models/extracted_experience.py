@@ -5,7 +5,7 @@ experiences, internships, and competitions with line-length awareness and
 trimming capabilities for page fitting.
 """
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from typing import Any
 
 from models.line_metrics import LineMetrics
@@ -20,6 +20,7 @@ class ExtractedJobExperience:
         title: Job title or position
         start_date: Start year or date
         end_date: End year, date, or "Present"
+        location: Location of the job (optional)
         description_bullets: List of achievement/responsibility bullet points
         line_length: Number of lines this entry occupies (1 + bullet lines)
         relevance_score: Score indicating relevance to job requirements (default 0)
@@ -29,7 +30,8 @@ class ExtractedJobExperience:
     title: str
     start_date: str
     end_date: str
-    description_bullets: list[str]
+    location: str | None = None
+    description_bullets: list[str] = field(default_factory=list)
     line_length: int = 0
     relevance_score: int = 0
 
@@ -132,6 +134,7 @@ class ExtractedJobExperience:
             "title": self.title,
             "start_date": self.start_date,
             "end_date": self.end_date,
+            "location": self.location,
             "description_bullets": self.description_bullets,
             "line_length": self.line_length,
             "relevance_score": self.relevance_score,
@@ -183,11 +186,18 @@ class ExtractedJobExperience:
         else:
             bullets = []
 
+        # Validate: must have at least one bullet point
+        if not bullets:
+            raise ValueError(
+                f"Experience entry for '{company}' - '{title}' must have at least one description bullet point"
+            )
+
         return cls(
             company=company,
             title=title,
             start_date=data["start_date"],
             end_date=data["end_date"],
+            location=data.get("location"),
             description_bullets=bullets,
             relevance_score=relevance_score,
         )

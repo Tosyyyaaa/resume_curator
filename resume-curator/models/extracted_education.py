@@ -19,6 +19,7 @@ class ExtractedEducation:
         degree: Degree or qualification obtained
         start_date: Start year
         end_date: End year or "Present"
+        location: Location of the institution (optional)
         grade: GPA, grade, or honors (optional)
         courses: List of relevant courses (optional)
         line_length: Number of lines this entry occupies
@@ -28,6 +29,7 @@ class ExtractedEducation:
     degree: str
     start_date: str
     end_date: str
+    location: str | None = None
     grade: str | None = None
     courses: list[str] | None = None
     line_length: int = 0
@@ -43,15 +45,15 @@ class ExtractedEducation:
     def calculate_line_length(self) -> int:
         """Calculate number of lines needed for education entry.
 
-        Education format:
-            Line 1: School Name
-            Line 2: Degree | Start - End | Grade (if present)
-            Line 3+ (optional): Courses: Course1, Course2, ... (if courses present)
+        Education format (for bengt/deedy LaTeX templates):
+            Line 1-2: educationHeading (degree + school with location/dates)
+            Line 3+ (optional): Modules line (if courses present)
+            Line N: sectionsep spacing
 
         Returns:
-            Number of lines (2-3+ depending on courses)
+            Number of lines (3-5+ depending on courses)
         """
-        lines = 2  # School + degree/dates always present
+        lines = 3  # educationHeading (2 lines) + sectionsep spacing (1 line)
 
         # Add line(s) for courses if any are present
         if self.courses and len(self.courses) > 0:
@@ -72,6 +74,7 @@ class ExtractedEducation:
             "degree": self.degree,
             "start_date": self.start_date,
             "end_date": self.end_date,
+            "location": self.location,
             "grade": self.grade,
             "courses": self.courses,
             "line_length": self.line_length,
@@ -95,6 +98,7 @@ class ExtractedEducation:
             degree=data["degree"],
             start_date=data["start_date"],
             end_date=data["end_date"],
+            location=data.get("location"),
             grade=data.get("grade"),
             courses=data.get("courses", []),
         )

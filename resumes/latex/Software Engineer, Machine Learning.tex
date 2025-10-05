@@ -1,0 +1,144 @@
+\documentclass[]{resume-openfont}
+
+\pagestyle{fancy}
+\resetHeaderAndFooter
+
+%--------------------------------------------------------------
+% Convenience command - make it easy to fill template
+
+% Create job position command. Parameters: company, position, location, when
+\newcommand{\resumeHeading}[4]{\runsubsection{\uppercase{#1}}\descript{ | #2}\hfill\location{#3 | #4}\fakeNewLine}
+
+% Create education heading. Parameters: Name, degree, location, when
+\newcommand{\educationHeading}[4]{\runsubsection{#1}\hspace*{\fill}  \location{#3 | #4}\\
+\descript{#2}\fakeNewLine}
+
+% Create project heading. Parameters: Name, link, Tech stack
+\newcommand{\projectHeading}[3]{\Project{#1}{#2}
+\descript{#3}\\}
+
+\newcommand{\projectHeadingWithDate}[4]{\Project{#1}{#2}
+\descript{#3 | #4}\\}
+
+% Parameters: courses
+\newcommand{\modules}[1]{\textbf{Modules:} #1}
+
+% Parameters: courses
+\newcommand{\teacherAssistant}[1]{\textbf{Teacher Assistant (TA):} #1}
+
+%--------------------------------------------------------------
+\begin{document}
+
+%--------------------------------------------------------------
+%     Profile
+%--------------------------------------------------------------
+\newcommand{\yourName}{John Doe}
+\newcommand{\yourEmail}{john.doe@example.com}
+\newcommand{\yourPhone}{+1234567890}
+\newcommand{\githubUserName}{john-doe}
+\newcommand{\linkedInUserName}{john-doe}
+
+\begin{center}
+    \Huge \scshape \latoRegular{\yourName} \\ \vspace{1pt}
+    \small \href{mailto:\yourEmail}{\underline{\yourEmail}}  $|$  \yourPhone $|$
+    \href{https://github.com/\githubUserName}{\underline{github/\githubUserName}} $|$
+    \href{https://www.linkedin.com/in/\linkedInUserName}{\underline{linkedin/\linkedInUserName}}
+\end{center}
+
+%--------------------------------------------------------------
+%     Education
+%--------------------------------------------------------------
+\section{Education}
+\educationHeading{B.Sc. in Computer Science (3.8/4.0)}{University of California, Los Angeles}{California, U.S}{2020 - 2024}
+\modules{Computational Linguistics, Computer Vision, Machine Learning, Natural Language Processing} \newline
+
+\sectionsep
+
+\educationHeading{M.Sc. in Machine Learning (Distinction: 80\%)}{University of Cambridge}{Cambridge, UK}{2024 - 2025}
+\modules{Introduction to Machine Learning, Deep Learning, Computer Vision, Natural Language Processing} \newline
+
+\sectionsep
+
+\educationHeading{A-Levels (A*,A*,A*,A*)}{St. John's College}{London, UK}{2017 - 2019}
+\modules{Maths, Further Maths, Computer Science, Physics} \newline
+
+\sectionsep
+
+\educationHeading{Python Programming}{Code Nation}{Online}{2020 - 2021}
+\sectionsep
+
+
+
+%--------------------------------------------------------------
+%     Experience
+%--------------------------------------------------------------
+\section{Work Experience}
+\resumeHeading{Google}{Senior Software Engineer}{Mountain View, CA}{2022 - 2024}
+\begin{bullets}
+    \item Led development of distributed ML pipeline processing 10TB+ daily data with 99.9\% uptime
+    \item Optimized TensorFlow models reducing inference latency by 60\% through quantization and pruning
+    \item Mentored team of 5 engineers on best practices for scalable machine learning systems
+\end{bullets}
+\sectionsep
+\resumeHeading{Meta}{Meta Engineer}{SF, California}{2024 - 2025}
+\begin{bullets}
+    \item Increased user engagement by 200\% using reinforcement learning
+\end{bullets}
+\sectionsep
+\resumeHeading{Amazon Web Services}{Machine Learning Engineer}{Seattle, WA}{2020 - 2022}
+\begin{bullets}
+    \item Developed real-time fraud detection system processing 1M+ transactions/second with 95\% accuracy
+    \item Built automated ML pipeline reducing model training time from 48 hours to 4 hours
+    \item Implemented A/B testing framework used by 20+ teams across AWS
+\end{bullets}
+\sectionsep
+\resumeHeading{Tesla}{Autopilot Software Intern}{Palo Alto, CA}{2018 - 2019}
+\begin{bullets}
+    \item Developed lane detection algorithms improving accuracy by 12\% in adverse weather conditions
+    \item Optimized neural network inference on custom Tesla hardware reducing latency by 35ms
+\end{bullets}
+\sectionsep
+\resumeHeading{OpenAI}{Research Engineer}{San Francisco, CA}{2019 - 2020}
+\begin{bullets}
+    \item Contributed to GPT-2 fine-tuning research achieving 15\% improvement on domain-specific tasks
+    \item Developed distributed training framework enabling 8x faster model convergence
+    \item Published 2 papers at NeurIPS and ICML on attention mechanisms
+\end{bullets}
+\sectionsep
+\resumeHeading{Meta AI Challenge}{Competition}{Online}{2020 - 2021}
+\begin{bullets}
+    \item Won first place in the Meta AI Challenge using a transformer model
+\end{bullets}
+\sectionsep
+\resumeHeading{Meta}{Meta Intern}{SF, California}{2024 - 2025}
+\begin{bullets}
+    \item Decreased instagram's load time by 50\% using distributed systems
+\end{bullets}
+\sectionsep
+
+
+%--------------------------------------------------------------
+%     Projects
+%--------------------------------------------------------------
+\section{Projects}
+\sectionsep
+
+\projectHeading{Distributed Training Framework}{https://github.com/user/project}{}
+Created open-source library for distributed deep learning across heterogeneou...
+\sectionsep
+
+
+
+%--------------------------------------------------------------
+%     Skills
+%--------------------------------------------------------------
+\section{Skills}
+
+\begin{skillList}
+    \doubleItem{Languages:}{Python, Java, C++, JavaScript, SQL}%
+    {Frameworks:}{TensorFlow, PyTorch, Scikit-learn}
+    \\
+    \doubleItem{Web Development:}{}%
+    {Tools:}{Git, Docker, Kubernetes}
+\end{skillList}
+\end{document}

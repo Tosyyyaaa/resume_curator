@@ -17,7 +17,7 @@ from models.extracted_education import ExtractedEducation
 from models.extracted_experience import ExtractedJobExperience
 from models.extracted_project import ExtractedProject
 from models.extracted_skills import ExtractedSkills
-from models.pending_resume import PendingResume
+from models.base_resume import BaseResume
 from models.resume_header import ResumeHeader
 
 # Import JobDescription from job-description-parser using direct file import
@@ -167,22 +167,74 @@ def extract_skills(
     )
 
 
+def create_resume_for_template(
+    template_name: str,
+    header: ResumeHeader,
+    experiences: list[ExtractedJobExperience],
+    education: list[ExtractedEducation],
+    projects: list[ExtractedProject],
+    skills: ExtractedSkills,
+    page_limit: int,
+) -> BaseResume:
+    """Factory function to create template-specific resume instance.
+
+    Args:
+        template_name: Name of template ('bengt', 'deedy', etc.)
+        header: Resume header with personal information
+        experiences: List of job experiences
+        education: List of education entries
+        projects: List of projects
+        skills: Skills section
+        page_limit: Maximum number of pages allowed
+
+    Returns:
+        BaseResume subclass instance (BengtResume, DeedyResume, etc.)
+
+    Raises:
+        ValueError: If template_name is not recognized
+    """
+    if template_name == "bengt":
+        from models.bengt_resume import BengtResume
+        return BengtResume.with_page_limit(
+            header=header,
+            experiences=experiences,
+            education=education,
+            projects=projects,
+            skills=skills,
+            page_limit=page_limit,
+        )
+    elif template_name == "deedy":
+        from models.deedy_resume import DeedyResume
+        return DeedyResume.with_page_limit(
+            header=header,
+            experiences=experiences,
+            education=education,
+            projects=projects,
+            skills=skills,
+            page_limit=page_limit,
+        )
+    else:
+        raise ValueError(f"Unknown template: {template_name}")
+
+
 def generate_pending_resume(
     job_description: JobDescription,
     candidate_data: CandidateData,
     page_limit: int,
+    template_name: str = "bengt",
     use_llm: bool = True,
-) -> PendingResume:
+) -> BaseResume:
     """Generate a page-constrained resume from candidate data and job description.
 
     Args:
         job_description: Parsed job description
         candidate_data: Loaded candidate data
         page_limit: Maximum number of pages
+        template_name: Template to use ('bengt', 'deedy', etc.)
         use_llm: Whether to use LLM optimization for long bullets (default: True)
 
     Returns:
-        PendingResume instance that fits within page limit
+        BaseResume instance (template-specific) that fits within page limit
     """
     # Extract all components
     header = extract_header(candidate_data)
@@ -191,8 +243,9 @@ def generate_pending_resume(
     projects = extract_projects(candidate_data, job_description, use_llm=use_llm)
     skills = extract_skills(candidate_data, job_description)
 
-    # Create PendingResume with page limit
-    resume = PendingResume.with_page_limit(
+    # Create template-specific resume with page limit using factory
+    resume = create_resume_for_template(
+        template_name=template_name,
         header=header,
         experiences=experiences,
         education=education,
@@ -250,6 +303,12 @@ def main() -> None:
         help="Output format (default: json)",
     )
     parser.add_argument(
+        "--template-name",
+        choices=["bengt", "deedy"],
+        default="bengt",
+        help="LaTeX template name to use (default: bengt)",
+    )
+    parser.add_argument(
         "--no-llm",
         action="store_true",
         help="Disable LLM-based bullet point optimization (for offline use)",
@@ -280,7 +339,7 @@ def main() -> None:
 
     try:
         resume = generate_pending_resume(
-            job_description, candidate_data, args.page_limit, use_llm=use_llm
+            job_description, candidate_data, args.page_limit, args.template_name, use_llm=use_llm
         )
 
         print(f"\nResume Summary:")
@@ -292,16 +351,41 @@ def main() -> None:
         print(f"  Total: {resume.line_length} / {resume.permitted_line_length} lines")
         print(f"  Fits {args.page_limit} page(s): {resume.fits_page_limit()}")
 
-        # TODO: Output formatting (currently just prints summary)
-        if args.output_format != "json":
-            print(f"\nNote: {args.output_format} formatting not yet implemented")
-            print("Resume data structure is complete and ready for formatting")
-            # Dump resume for now
-        else:
+        # Output formatting
+        if args.output_format == "json":
             # Make dir resumes/json if it doesn't exist
             Path("resumes/json").mkdir(parents=True, exist_ok=True)
-            with open(f"resumes/json/{job_description.job_title}.json", "w") as f:
+            output_path = Path(f"resumes/json/{job_description.job_title}.json")
+            with open(output_path, "w") as f:
                 json.dump(resume.to_dict(), f, indent=4)
+            print(f"Resume saved to: {output_path.resolve()}")
+
+        elif args.output_format == "latex":
+            # Import LaTeX generator
+            from utils.latex_generator import generate_latex_resume
+
+            # Create output directory
+            output_dir = Path("resumes/latex")
+            output_dir.mkdir(parents=True, exist_ok=True)
+            output_path = output_dir / f"{job_description.job_title}.tex"
+
+            try:
+                # Resume already knows its template name, no need to pass it
+                generate_latex_resume(resume, output_path)
+                print(f"LaTeX resume saved to: {output_path.resolve()} (template: {resume.template_name})")
+            except ValueError as e:
+                print(f"Error: Invalid resume data: {e}", file=sys.stderr)
+                sys.exit(1)
+            except Exception as e:
+                print(f"Error generating LaTeX: {e}", file=sys.stderr)
+                import traceback
+                traceback.print_exc()
+                sys.exit(1)
+
+        else:
+            # Markdown or other formats (future)
+            print(f"\nNote: {args.output_format} formatting not yet implemented")
+            print("Resume data structure is complete and ready for formatting")
 
     except Exception as e:
         print(f"Error generating resume: {e}", file=sys.stderr)

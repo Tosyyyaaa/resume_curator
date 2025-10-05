@@ -1,0 +1,166 @@
+\documentclass[]{resume-openfont}
+
+\pagestyle{fancy}
+\resetHeaderAndFooter
+
+%--------------------------------------------------------------
+% Convenience command - make it easy to fill template
+
+% Create job position command. Parameters: company, position, location, when
+\newcommand{\resumeHeading}[4]{\runsubsection{\uppercase{#1}}\descript{ | #2}\hfill\location{#3 | #4}\fakeNewLine}
+
+% Create education heading. Parameters: Name, degree, location, when
+\newcommand{\educationHeading}[4]{\runsubsection{#1}\hspace*{\fill}  \location{#3 | #4}\\
+\descript{#2}\fakeNewLine}
+
+% Create project heading. Parameters: Name, link, Tech stack
+\newcommand{\projectHeading}[3]{\Project{#1}{#2}
+\descript{#3}\\}
+
+\newcommand{\projectHeadingWithDate}[4]{\Project{#1}{#2}
+\descript{#3 | #4}\\}
+
+% Parameters: courses
+\newcommand{\modules}[1]{\textbf{Modules:} #1}
+
+% Parameters: courses
+\newcommand{\teacherAssistant}[1]{\textbf{Teacher Assistant (TA):} #1}
+ 
+%--------------------------------------------------------------
+\begin{document}
+
+%--------------------------------------------------------------
+%     Profile
+%--------------------------------------------------------------
+\newcommand{\yourName}{Bengt Lofgren}
+% How you want it to show up on the resume
+%\newcommand{\yourWebsite}{website.com}
+% vs how you want it to show up. If it's you can just replace "\yourWebsiteLink" with "yourWebsite"
+%\newcommand{\yourWebsiteLink}{https://website.com}
+\newcommand{\yourEmail}{bengtlofgren8@gmail.com}
+\newcommand{\yourPhone}{+447478131798}
+\newcommand{\githubUserName}{bengtlofgren}
+\newcommand{\linkedInUserName}{bengt-lofgren-2b6893146}
+
+% An alternate profile section 
+% \alignProfileTable
+% \begin{tabular*}{\textwidth}{l@{\extracolsep{\fill}}r}
+%     \ralewayBold{\href{\yourWebsiteLink}{\Large \yourName}} & 
+%     Email : \href{mailto:\yourEmail}{\yourEmail}
+%     \\
+%     \href{https://github.com/\githubUserName}{GitHub://\githubUserName} & 
+%     Mobile : \yourPhone
+%     \\
+%     \href{https://www.linkedin.com/in/\linkedInUserName}{LinkedIn://\linkedInUserName} & Website : \href{\yourWebsiteLink}{\yourWebsite}
+%     \\
+% \end{tabular*}
+
+\begin{center}
+    \Huge \scshape \latoRegular{\yourName} \\ \vspace{1pt}
+    \small \href{mailto:\yourEmail}{\underline{\yourEmail}}  $|$  \yourPhone $|$ 
+    % \href{https://www.linkedin.com/in/\linkedInUserName}{\underline{linkedIn/\linkedInUserName}} $|$
+    \href{https://github.com/\githubUserName}{\underline{github/\githubUserName}} 
+    % $|$ \href{\yourWebsiteLink}{\underline{\yourWebsite}}
+\end{center}
+
+%--------------------------------------------------------------
+%     Education
+%--------------------------------------------------------------
+\section{Education}
+% Put school first and degree second if your school is reputable
+\educationHeading{MSc Data Science and Machine Learning}{University College London}{London, UK}{Sept 2021 - Sept 2022}
+\modules{Supervised Learning; Graphical Models; Bayesian Deep Learning; NLP; Reinforcement Learning;} \newline
+
+ML Seminar (Modern ML techniques); Dissertation on Gaussian Processes with Boundary Conditions (using stohastic differential equations) -
+\textbf{Distinction achieved, 80\% in thesis}
+
+\sectionsep
+
+\educationHeading{B.A (Hons) Economics}{University of Cambridge}{Cambridge, UK}{Oct 2018 - July 2021}
+\modules{Microeconomics; Macroeconomics; Advanced Econometrics; Economic Theory and Analysis} \newline
+
+%\teacherAssistant{World Wide Web Information Systems Development}
+\textbf{Overall 2:1 (68\%); with 1:1 Dissertation on Inequality and Immobility in a Referral Economy}
+\sectionsep
+
+%--------------------------------------------------------------
+%     Experience
+%--------------------------------------------------------------
+\section{Work Experience}
+\sectionsep
+\resumeHeading{WormholeLabs}{Rust Engineer}{London, UK}{February 2024 - Current}
+\begin{bullets}
+    \item Wrote the solana shim contract (V2) for the liquidity layer
+    \item Rewrote all typescript tests in rust for the contract
+\end{bullets}
+\sectionsep
+\sectionsep
+\resumeHeading{Diffusion (Altscan.ai)}{Rust Engineer}{London, UK}{April 2024 - Dec 2024}
+\begin{bullets}
+    \item Solely responsible for building a Solana indexer using novel methods for decoding and efficiently indexing swaps and pools. Minimal memory usage and low latency were vital.
+\end{bullets}
+\sectionsep
+\resumeHeading{Heliax}{Rust Engineer}{London, UK}{Jun 2022 - April 2024}
+\begin{bullets}
+    \item Coding the ledger (Rust), writing docs + specs (MDx + JS), improving testing (Rust and ShellScript), Developing the sdk. Wrote articles: https://shorturl.at/Yjibn, https://shorturl.at/lcRD3
+\end{bullets}
+\sectionsep
+\resumeHeading{Jane Street}{Business Development Intern}{London, UK}{Jul 2020 – Sep 2020}
+\begin{bullets}
+    \item Devised solution using \textbf{VBA} and \textbf{SQL} to flag potential wash trade activity, compressing 16 hrs -> 20 seconds
+\end{bullets}
+\sectionsep
+
+\resumeHeading{irecommend Sweden AB}{Fullstack Developer}{Stockholm, SWE}{Jun 2019 - Jan 2020}
+\begin{bullets}
+    \item Created fully automated communication API in \textbf{Python}, with frontend in \textbf{React JS}
+\end{bullets}
+\sectionsep
+
+%--------------------------------------------------------------
+%     Projects
+%--------------------------------------------------------------
+\section{Projects}
+\sectionsep
+
+\projectHeading{MSc Thesis: GP regression with Boundary Conditions}{https://github.com/bengtlofgren/MScProject}{SkLearn, PyTorch}
+Used the duality between a special type of Stochastic Partial Differential Equations (SPDE) and the Gaussian Process (GP) Regression in order to form a kernel that is able to take boundary conditions into account, for up to 3-D space.
+\sectionsep
+
+\projectHeading{Implementation of ADMMBO}{https://github.com/bengtlofgren/BayesianOptimization}{Sci-kit Learn and Bayes-op}
+Implemented a 2020 paper that proposed a novel method of optimising unknown functions with unknown constraints using Gaussian Processes setups and iterative techniques.
+\sectionsep
+
+\projectHeading{End-to-end sentence simplifier (NLP)}{https://github.com/cngzlsh/ADAPT_LS/tree/master}{BERT, Pandas, Plainifier}
+End-to-end implementation for competitively simplifying text using a combination of recursive bi-directional neural networks, linear neural networks, bag-of-words, and PCA
+\sectionsep
+
+\projectHeading{Risk Premium Calculator}{https://github.com/bengtlofgren/RiskPremium}{Python, Rust}
+Generates a non-approximated risk-premium matrix for any number of players using the Independent Chip Model (ICM) calculations. Implemented in python and rust.
+\sectionsep
+
+
+
+
+
+% Example using bullets and dates 
+% \projectHeadingWithDate{Hogwart\textquotesingle{}s Library Management System}{https://github.com/Aarif123456/hogwartslibrary}{PHP, JavaScript, HTML, CSS, MySQL}{Aug 2019}
+% \begin{bullets}
+    % \item A full-stack library management system, where users can manage books and holds on their accounts. Users can search the library\textquotesingle{}s catalogue, which has every book mentioned in the Harry Potter series. The system distinguishes between 4 users. For examples, librarians who can also check or return books on behalf of users.\\
+% \end{bullets}
+% \sectionsep
+  
+
+%--------------------------------------------------------------
+%     Skills
+%--------------------------------------------------------------
+\section{Skills}
+
+\begin{skillList}
+    \doubleItem{Languages:}{Rust, Python, Solidity, Cairo, Bash, VBA, SQL, JS/TS}%
+    {Libraries:}{Tokio, Deadpool, Pandas, TensorFlow, JAX, Gpytorch}
+    \\
+    \doubleItem{Web Development:}{Vue, Next, React, HTML/CSS}
+    {Technology:}{Git, AWS, Docker, \LaTeX}%
+\end{skillList}
+\end{document}
