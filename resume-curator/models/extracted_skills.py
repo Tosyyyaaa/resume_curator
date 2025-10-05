@@ -18,12 +18,14 @@ class ExtractedSkills:
         programming_languages: List of programming languages
         frameworks: List of frameworks and libraries
         tools: List of tools and technologies
+        spoken_languages: List of spoken languages
         line_length: Number of lines this section occupies
     """
 
     programming_languages: list[str]
     frameworks: list[str]
     tools: list[str]
+    spoken_languages: list[str]
     line_length: int = 0
 
     def __post_init__(self) -> None:
@@ -37,6 +39,7 @@ class ExtractedSkills:
             Line 1 (if present): Programming Languages: Lang1, Lang2, ...
             Line 2 (if present): Frameworks: Framework1, Framework2, ...
             Line 3 (if present): Tools: Tool1, Tool2, ...
+            Line 4 (if present): Spoken Languages: Lang1, Lang2, ...
 
         Each line may wrap to multiple lines if skill list is long.
 
@@ -62,6 +65,11 @@ class ExtractedSkills:
             tools_text = "Tools: " + ", ".join(self.tools)
             lines += LineMetrics.calculate_text_lines(tools_text)
 
+        # Spoken languages line(s)
+        if self.spoken_languages:
+            spoken_text = "Spoken Languages: " + ", ".join(self.spoken_languages)
+            lines += LineMetrics.calculate_text_lines(spoken_text)
+
         return lines
 
     def to_dict(self) -> dict[str, Any]:
@@ -74,6 +82,7 @@ class ExtractedSkills:
             "programming_languages": self.programming_languages,
             "frameworks": self.frameworks,
             "tools": self.tools,
+            "spoken_languages": self.spoken_languages,
             "line_length": self.line_length,
         }
 
@@ -83,6 +92,7 @@ class ExtractedSkills:
         programming_languages: list[str] | None,
         frameworks: list[str] | None,
         tools: list[str] | None,
+        spoken_languages: list[str] | None = None,
     ) -> "ExtractedSkills":
         """Create ExtractedSkills from skill lists.
 
@@ -90,6 +100,7 @@ class ExtractedSkills:
             programming_languages: List of programming languages (or None)
             frameworks: List of frameworks (or None)
             tools: List of tools (or None)
+            spoken_languages: List of spoken languages (or None)
 
         Returns:
             ExtractedSkills instance with None values converted to empty lists
@@ -98,4 +109,5 @@ class ExtractedSkills:
             programming_languages=programming_languages or [],
             frameworks=frameworks or [],
             tools=tools or [],
+            spoken_languages=spoken_languages or [],
         )

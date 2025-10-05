@@ -42,7 +42,7 @@ class BulletOptimizer:
         self.client = gemini_client or GeminiClient()
 
     def optimize_bullets(
-        self, bullets: list[str], max_chars_per_bullet: int = 80
+        self, bullets: list[str], max_chars_per_bullet: int = 100
     ) -> list[str]:
         """Optimize and rank bullet points for resume.
 
@@ -134,7 +134,7 @@ The bullets array should contain the optimized and ranked bullet points."""
 
 
 def optimize_experience_bullets(
-    bullets: list[str], max_chars_per_bullet: int = 80
+    bullets: list[str], max_chars_per_bullet: int = 100
 ) -> list[str]:
     """Convenience function to optimize experience bullets.
 

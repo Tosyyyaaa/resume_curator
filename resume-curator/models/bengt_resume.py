@@ -74,10 +74,20 @@ class BengtResume(BaseResume):
         - 116 chars/line for experiences and projects
         - Single-line skills (must fit in specified char limits)
 
+        Template overhead (from template_with_placeholders.tex):
+        - \\section{Education} = 1 line
+        - \\section{Work Experience} = 1 line
+        - \\section{Projects} + \\sectionsep = 2 lines (ALWAYS in template!)
+        - \\section{Skills} = 1 line
+        Total template overhead: 5 lines
+
         Returns:
             Total line count for the entire resume
         """
         total = self.header.line_length
+
+        # Add template section headers (always present)
+        total += 5  # Education + Work Experience + Projects+sectionsep + Skills
 
         # Sum all experiences
         for experience in self.experiences:
@@ -120,8 +130,8 @@ class BengtResume(BaseResume):
                 project.trim_description(80)
                 self._line_length = self.calculate_total_line_length()
 
-        # Phase 2: Remove projects from end
-        while self.projects and not self.fits_page_limit():
+        # Phase 2: Remove projects from end (but keep at least 1)
+        while len(self.projects) > 1 and not self.fits_page_limit():
             self.projects.pop()
             self._line_length = self.calculate_total_line_length()
 

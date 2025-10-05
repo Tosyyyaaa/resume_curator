@@ -5,5 +5,6 @@
     "location": "London, UK",
     "linkedin": "https://www.linkedin.com/in/john-doe",
     "github": "https://github.com/john-doe",
-    "website": "https://john-doe.com"
+    "website": "https://john-doe.com",
+    "spoken_languages": ["English", "French", "Spanish"]
 }
