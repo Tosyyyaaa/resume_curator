@@ -24,7 +24,7 @@ class ExtractedProject:
     """
 
     name: str
-    description: str
+    description: list[str]
     start_date: str
     end_date: str
     line_length: int = 0
@@ -39,21 +39,22 @@ class ExtractedProject:
 
         Project format:
             Line 1: Project Name | Start - End
-            Lines 2+ (optional): Description text (if present)
+            Lines 2+ (optional): Description bullet points (if present)
 
         Returns:
-            Number of lines (1 for name + description line count)
+            Number of lines (1 for name + description bullet line counts)
         """
         lines = 1  # Name and dates line
 
-        # Add lines for description if present
+        # Add lines for each description bullet point
         if self.description:
-            description_lines = LineMetrics.calculate_text_lines(self.description)
-            lines += description_lines
+            for bullet in self.description:
+                bullet_lines = LineMetrics.calculate_text_lines(bullet)
+                lines += bullet_lines
 
         return lines
 
-    def has_long_description(self, max_chars: int = 80) -> bool:
+    def has_long_description(self, max_chars: int = 116) -> bool:
         """Check if description exceeds the character limit.
 
         Args:
@@ -64,7 +65,7 @@ class ExtractedProject:
         """
         return len(self.description) > max_chars
 
-    def optimize_description_with_llm(self, max_chars: int = 80) -> None:
+    def optimize_description_with_llm(self, max_chars: int = 116) -> None:
         """Optimize project description using LLM.
 
         Uses Gemini to compress the description to fit character limit while
@@ -84,12 +85,9 @@ class ExtractedProject:
         try:
             print(f"  Optimizing description for {self.name}...")
             optimizer = BulletOptimizer()
-            # Treat project description as a single bullet
-            optimized = optimizer.optimize_bullets([self.description], max_chars)
-
-            if optimized and optimized[0]:
-                self.description = optimized[0]
-                self.line_length = self.calculate_line_length()
+            optimized = optimizer.optimize_bullets(self.description, max_chars)
+            self.description = optimized
+            self.line_length = self.calculate_line_length()
         except Exception as e:
             print(f"Warning: Failed to optimize description with LLM: {e}")
             # Fall back to simple truncation
@@ -106,16 +104,19 @@ class ExtractedProject:
         Note:
             This method modifies description in place and recalculates line_length
         """
-        if len(self.description) <= max_chars:
-            return  # Already fits
+        new_description = []
+        for desc in self.description:
+            if len(self.description) <= max_chars:
+                new_description.append(desc)
 
-        # Trim and add ellipsis
-        if max_chars > 3:
-            self.description = self.description[: max_chars - 3] + "..."
-        else:
-            self.description = "..."[:max_chars]
+            # Trim and add ellipsis
+            if max_chars > 3:
+                new_description.append(desc[: max_chars - 3] + "...")
+            else:
+                new_description.append("..."[:max_chars])
 
         # Recalculate line length
+        self.description = new_description
         self.line_length = self.calculate_line_length()
 
     def to_dict(self) -> dict[str, Any]:
@@ -152,14 +153,9 @@ class ExtractedProject:
         # Parse description - handle both list and string formats
         description = data.get("description", "")
 
-        if isinstance(description, list):
-            # New format: list of description items, join into single string
-            description = " ".join(desc.strip() for desc in description if desc.strip())
-        elif isinstance(description, str):
-            # Legacy format: already a string
-            description = description.strip()
-        else:
-            description = ""
+        if isinstance(description, str):
+            # If using legacy of str description, make it into a single bullet point
+            description = [description]
 
         # Validate: must have a description
         if not description:

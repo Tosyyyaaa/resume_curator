@@ -180,6 +180,10 @@ def _build_experience_section(experiences: list["ExtractedJobExperience"]) -> st
     exp_latex = ""
 
     for exp in experiences:
+        # Skip experiences with no bullet points - they shouldn't be included
+        if not exp.description_bullets:
+            continue
+
         company = _escape_latex(exp.company)
         title = _escape_latex(exp.title)
         start_date = _escape_latex(exp.start_date)
@@ -193,13 +197,12 @@ def _build_experience_section(experiences: list["ExtractedJobExperience"]) -> st
         # Build resumeHeading: {company}{title}{location}{dates}
         exp_latex += f"\\resumeHeading{{{company}}}{{{title}}}{{{location}}}{{{dates}}}\n"
 
-        # Add bullet points if available
-        if bullets:
-            exp_latex += "\\begin{bullets}\n"
-            for bullet in bullets:
-                bullet_escaped = _escape_latex(bullet)
-                exp_latex += f"    \\item {bullet_escaped}\n"
-            exp_latex += "\\end{bullets}\n"
+        # Add bullet points
+        exp_latex += "\\begin{bullets}\n"
+        for bullet in bullets:
+            bullet_escaped = _escape_latex(bullet)
+            exp_latex += f"    \\item {bullet_escaped}\n"
+        exp_latex += "\\end{bullets}\n"
 
         exp_latex += "\\sectionsep\n"
 
@@ -227,7 +230,6 @@ def _build_projects_section(projects: list["ExtractedProject"]) -> str:
 
     for proj in projects:
         name = _escape_latex(proj.name)
-        description = _escape_latex(proj.description)
 
         # Generate a placeholder GitHub link (template expects a link)
         link = "https://github.com/user/project"
@@ -238,9 +240,13 @@ def _build_projects_section(projects: list["ExtractedProject"]) -> str:
         # Build projectHeading: {name}{link}{tech}
         proj_latex += f"\\projectHeading{{{name}}}{{{link}}}{{{tech}}}\n"
 
-        # Add description text
-        if description:
-            proj_latex += f"{description}\n"
+        # Add description bullet points
+        if proj.description:
+            proj_latex += "\\begin{bullets}\n"
+            for bullet in proj.description:
+                escaped_bullet = _escape_latex(bullet)
+                proj_latex += f"    \\item {escaped_bullet}\n"
+            proj_latex += "\\end{bullets}\n"
 
         proj_latex += "\\sectionsep\n\n"
 
@@ -253,7 +259,7 @@ def _extract_skills_data(skills: "ExtractedSkills") -> dict[str, str]:
     Character limits (CANNOT wrap to multiple lines):
     - Languages: 52 chars
     - Frameworks: 50 chars
-    - Web Development: 40 chars
+    - Spoken Languages: 40 chars
     - Tools: 48 chars
 
     Args:
@@ -267,19 +273,21 @@ def _extract_skills_data(skills: "ExtractedSkills") -> dict[str, str]:
     prog_langs = skills.programming_languages
     frameworks = skills.frameworks
     tools = skills.tools
+    spoken_langs = skills.spoken_languages
 
     # Build comma-separated lists
     langs_str = ", ".join([_escape_latex(lang) for lang in prog_langs]) if prog_langs else ""
     frameworks_str = ", ".join([_escape_latex(fw) for fw in frameworks]) if frameworks else ""
     tools_str = ", ".join([_escape_latex(tool) for tool in tools]) if tools else ""
+    spoken_str = ", ".join([_escape_latex(lang) for lang in spoken_langs]) if spoken_langs else ""
 
     return {
         '{{SKILLS_ROW1_LEFT_LABEL}}': 'Languages:',
         '{{SKILLS_ROW1_LEFT_VALUE}}': langs_str,
         '{{SKILLS_ROW1_RIGHT_LABEL}}': 'Frameworks:',
         '{{SKILLS_ROW1_RIGHT_VALUE}}': frameworks_str,
-        '{{SKILLS_ROW2_LEFT_LABEL}}': 'Web Development:',
-        '{{SKILLS_ROW2_LEFT_VALUE}}': '',  # Empty for now, can be populated from skills data
+        '{{SKILLS_ROW2_LEFT_LABEL}}': 'Spoken Languages:',
+        '{{SKILLS_ROW2_LEFT_VALUE}}': spoken_str,
         '{{SKILLS_ROW2_RIGHT_LABEL}}': 'Tools:',
         '{{SKILLS_ROW2_RIGHT_VALUE}}': tools_str
     }

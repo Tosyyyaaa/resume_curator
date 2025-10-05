@@ -4,6 +4,8 @@ This repository sets out to make resume curation easier.
 
 Example output:
 
+![alt text](image.png)
+
 ![Example-output-of-curator](assets/example_output.png)
 
 ## Data ingestion (input)
@@ -101,7 +103,7 @@ After running the curator, the output resume will be found in the `resumes/` dir
 
 ## Using LaTeX Output with Overleaf
 
-When generating a LaTeX resume, the output `.tex` file (e.g., `resumes/latex/Software Engineer, Machine Learning.tex`) needs to be uploaded to Overleaf along with the template's custom fonts and styling files. Simply uploading the `.tex` file alone won't work because it depends on custom document classes, fonts, and formatting definitions included in the template.
+When generating a LaTeX resume, the output `.tex` file (e.g., `resumes/latex/meta_engineer.tex`) needs to be uploaded to Overleaf along with the template's custom fonts and styling files. Simply uploading the `.tex` file alone won't work because it depends on custom document classes, fonts, and formatting definitions included in the template.
 
 ### Supported Templates
 
