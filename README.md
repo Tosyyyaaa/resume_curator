@@ -4,8 +4,6 @@ This repository sets out to make resume curation easier.
 
 Example output:
 
-![alt text](image.png)
-
 ![Example-output-of-curator](assets/example_output.png)
 
 ## Data ingestion (input)
@@ -124,8 +122,8 @@ Your generated resume file references these dependencies, so you need to provide
 ### Steps to Upload to Overleaf
 
 1. **Locate the template zip file**: All template zip files are conveniently located in `resumes/latex/template_zips/`. Choose the zip file matching your template:
-   - For **bengt** template: `resumes/latex/template_zips/bengt.zip`
-   - For **deedy** template: `resumes/latex/template_zips/deedy.zip`
+   - For **bengt** template: `resumes/latex/template_zips/bengt_zip_for_upload.zip`
+   - For **deedy** template: `resumes/latex/template_zips/deedy_zip_for_upload.zip`
 
 2. **Upload the zip file to Overleaf**:
 
