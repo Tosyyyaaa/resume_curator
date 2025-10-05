@@ -15,11 +15,11 @@ class LineMetrics:
 
     Constants:
         CHARS_PER_LINE: Standard character count per line (LaTeX default: 80)
-        LINES_PER_PAGE: Standard line count per page (LaTeX default: 45)
+        LINES_PER_PAGE: Standard line count per page (bengt/deedy template: 55)
     """
 
     CHARS_PER_LINE: Final[int] = 80
-    LINES_PER_PAGE: Final[int] = 45
+    LINES_PER_PAGE: Final[int] = 55
 
     @classmethod
     def page_to_lines(cls, pages: int) -> int:

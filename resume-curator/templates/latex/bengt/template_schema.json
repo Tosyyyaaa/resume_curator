@@ -1,0 +1,151 @@
+{
+  "_metadata": {
+    "description": "Template schema for resume-openfont LaTeX template with character limits",
+    "character_limits": {
+      "experience_bullets": {
+        "chars_per_line": 116,
+        "can_wrap": true,
+        "note": "Each bullet can span multiple lines at 116 chars per line"
+      },
+      "projects_description": {
+        "chars_per_line": 116,
+        "can_wrap": true,
+        "note": "Descriptions can span multiple lines at 116 chars per line"
+      },
+      "skills": {
+        "can_wrap": false,
+        "note": "Skills CANNOT wrap to multiple lines - must fit in single line",
+        "languages": 52,
+        "frameworks": 50,
+        "web_development": 40,
+        "tools": 48
+      }
+    }
+  },
+  "profile": {
+    "name": "Lorem Ipsum",
+    "email": "loremipsum@gmail.com",
+    "phone": "+44712312312",
+    "github": "loremipsum",
+    "linkedin": "lorem-ipsum-2b6973941"
+  },
+  "education": [
+    {
+      "degree": "MSc Data Science and Machine Learning",
+      "school": "University College London",
+      "location": "London, UK",
+      "dates": "Sept 2021 - Sept 2022",
+      "modules": "Supervised Learning; Graphical Models; Bayesian Deep Learning; NLP; Reinforcement Learning;",
+      "additional": "ML Seminar (Modern ML techniques); Dissertation on Gaussian Processes with Boundary Conditions (using stohastic differential equations) -\n\\textbf{Distinction achieved, 80\\% in thesis}"
+    },
+    {
+      "degree": "B.A (Hons) Economics",
+      "school": "University of Cambridge",
+      "location": "Cambridge, UK",
+      "dates": "Oct 2018 - July 2021",
+      "modules": "Microeconomics; Macroeconomics; Advanced Econometrics; Economic Theory and Analysis",
+      "additional": "\\textbf{Overall 2:1 (68\\%); with 1:1 Dissertation on Inequality and Immobility in a Referral Economy}"
+    }
+  ],
+  "experience": [
+    {
+      "company": "WormholeLabs",
+      "position": "Rust Engineer",
+      "location": "London, UK",
+      "dates": "February 2024 - Current",
+      "bullets": [
+        "Wrote the solana shim contract (V2) for the liquidity layer",
+        "Rewrote all typescript tests in rust for the contract"
+      ],
+      "_char_limit_per_line": 116
+    },
+    {
+      "company": "Diffusion (Altscan.ai)",
+      "position": "Rust Engineer",
+      "location": "London, UK",
+      "dates": "April 2024 - Dec 2024",
+      "bullets": [
+        "Solely responsible for building a Solana indexer using novel methods for decoding and efficiently indexing swaps and pools. Minimal memory usage and low latency were vital."
+      ],
+      "_char_limit_per_line": 116
+    },
+    {
+      "company": "Heliax",
+      "position": "Rust Engineer",
+      "location": "London, UK",
+      "dates": "Jun 2022 - April 2024",
+      "bullets": [
+        "Coding the ledger (Rust), writing docs + specs (MDx + JS), improving testing (Rust and ShellScript), Developing the sdk. Wrote articles: https://shorturl.at/Yjibn, https://shorturl.at/lcRD3"
+      ],
+      "_char_limit_per_line": 116
+    },
+    {
+      "company": "Jane Street",
+      "position": "Business Development Intern",
+      "location": "London, UK",
+      "dates": "Jul 2020 – Sep 2020",
+      "bullets": [
+        "Devised solution using \\textbf{VBA} and \\textbf{SQL} to flag potential wash trade activity, compressing 16 hrs -> 20 seconds"
+      ],
+      "_char_limit_per_line": 116
+    },
+    {
+      "company": "irecommend Sweden AB",
+      "position": "Fullstack Developer",
+      "location": "Stockholm, SWE",
+      "dates": "Jun 2019 - Jan 2020",
+      "bullets": [
+        "Created fully automated communication API in \\textbf{Python}, with frontend in \\textbf{React JS}"
+      ],
+      "_char_limit_per_line": 116
+    }
+  ],
+  "projects": [
+    {
+      "name": "MSc Thesis: GP regression with Boundary Conditions",
+      "link": "https://github.com/loremipsum/MScProject",
+      "tech": "SkLearn, PyTorch",
+      "description": "Used the duality between a special type of Stochastic Partial Differential Equations (SPDE) and the Gaussian Process (GP) Regression in order to form a kernel that is able to take boundary conditions into account, for up to 3-D space.",
+      "_char_limit_per_line": 116
+    },
+    {
+      "name": "Implementation of ADMMBO",
+      "link": "https://github.com/loremipsum/BayesianOptimization",
+      "tech": "Sci-kit Learn and Bayes-op",
+      "description": "Implemented a 2020 paper that proposed a novel method of optimising unknown functions with unknown constraints using Gaussian Processes setups and iterative techniques.",
+      "_char_limit_per_line": 116
+    },
+    {
+      "name": "End-to-end sentence simplifier (NLP)",
+      "link": "https://github.com/cngzlsh/ADAPT_LS/tree/master",
+      "tech": "BERT, Pandas, Plainifier",
+      "description": "End-to-end implementation for competitively simplifying text using a combination of recursive bi-directional neural networks, linear neural networks, bag-of-words, and PCA",
+      "_char_limit_per_line": 116
+    },
+    {
+      "name": "Risk Premium Calculator",
+      "link": "https://github.com/loremipsum/RiskPremium",
+      "tech": "Python, Rust",
+      "description": "Generates a non-approximated risk-premium matrix for any number of players using the Independent Chip Model (ICM) calculations. Implemented in python and rust.",
+      "_char_limit_per_line": 116
+    }
+  ],
+  "skills": {
+    "row1": {
+      "left_label": "Languages:",
+      "left_value": "Rust, Python, Solidity, Cairo, Bash, VBA, SQL, JS/TS",
+      "_left_char_limit": 52,
+      "right_label": "Frameworks:",
+      "right_value": "Tokio, Deadpool, Pandas, TensorFlow, JAX, Gpytorch",
+      "_right_char_limit": 50
+    },
+    "row2": {
+      "left_label": "Web Development:",
+      "left_value": "Vue, Next, React, HTML/CSS",
+      "_left_char_limit": 40,
+      "right_label": "Tools:",
+      "right_value": "Git, AWS, Docker, \\LaTeX",
+      "_right_char_limit": 48
+    }
+  }
+}

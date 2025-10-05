@@ -161,6 +161,12 @@ class ExtractedProject:
         else:
             description = ""
 
+        # Validate: must have a description
+        if not description:
+            raise ValueError(
+                f"Project '{data.get('name', 'Unknown')}' must have at least one line of description"
+            )
+
         return cls(
             name=data["name"],
             description=description,

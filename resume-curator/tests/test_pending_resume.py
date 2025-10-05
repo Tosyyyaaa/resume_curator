@@ -1,4 +1,7 @@
-"""Unit tests for PendingResume class."""
+"""Unit tests for BengtResume class (formerly PendingResume).
+
+Updated to test template-aware BengtResume implementation.
+"""
 
 import sys
 from pathlib import Path
@@ -11,11 +14,11 @@ from models.extracted_education import ExtractedEducation
 from models.extracted_experience import ExtractedJobExperience
 from models.extracted_project import ExtractedProject
 from models.extracted_skills import ExtractedSkills
-from models.pending_resume import PendingResume
+from models.bengt_resume import BengtResume
 from models.resume_header import ResumeHeader
 
 
-class TestPendingResume:
+class TestBengtResume:
     """Test suite for PendingResume class."""
 
     @pytest.fixture
@@ -94,8 +97,8 @@ class TestPendingResume:
         sample_projects,
         sample_skills,
     ):
-        """Test successful creation of PendingResume."""
-        resume = PendingResume(
+        """Test successful creation of BengtResume."""
+        resume = BengtResume(
             header=sample_header,
             experiences=sample_experiences,
             education=sample_education,
@@ -119,7 +122,7 @@ class TestPendingResume:
         sample_skills,
     ):
         """Test total line length calculation."""
-        resume = PendingResume(
+        resume = BengtResume(
             header=sample_header,
             experiences=sample_experiences,
             education=sample_education,
@@ -150,7 +153,7 @@ class TestPendingResume:
         sample_skills,
     ):
         """Test fits_page_limit returns True when within limit."""
-        resume = PendingResume(
+        resume = BengtResume(
             header=sample_header,
             experiences=sample_experiences,
             education=sample_education,
@@ -170,7 +173,7 @@ class TestPendingResume:
         sample_skills,
     ):
         """Test fits_page_limit returns False when over limit."""
-        resume = PendingResume(
+        resume = BengtResume(
             header=sample_header,
             experiences=sample_experiences,
             education=sample_education,
@@ -190,7 +193,7 @@ class TestPendingResume:
             location="NYC",
         )
 
-        resume = PendingResume(
+        resume = BengtResume(
             header=header,
             experiences=[],
             education=[],
@@ -207,7 +210,7 @@ class TestPendingResume:
         self, sample_header, sample_experiences
     ):
         """Test that line_length updates when components change."""
-        resume = PendingResume(
+        resume = BengtResume(
             header=sample_header,
             experiences=sample_experiences,
             education=[],
@@ -230,7 +233,7 @@ class TestPendingResume:
         self, sample_header, sample_experiences
     ):
         """Test conversion from page limit to line length."""
-        resume = PendingResume.with_page_limit(
+        resume = BengtResume.with_page_limit(
             header=sample_header,
             experiences=sample_experiences,
             education=[],
@@ -246,7 +249,7 @@ class TestPendingResume:
         self, sample_header, sample_experiences
     ):
         """Test with_page_limit for multiple pages."""
-        resume = PendingResume.with_page_limit(
+        resume = BengtResume.with_page_limit(
             header=sample_header,
             experiences=sample_experiences,
             education=[],
@@ -267,7 +270,7 @@ class TestPendingResume:
         sample_skills,
     ):
         """Test optimize_to_fit when resume already fits."""
-        resume = PendingResume(
+        resume = BengtResume(
             header=sample_header,
             experiences=sample_experiences,
             education=sample_education,
@@ -299,7 +302,7 @@ class TestPendingResume:
             end_date="2021",
         )
 
-        resume = PendingResume(
+        resume = BengtResume(
             header=sample_header,
             experiences=sample_experiences,
             education=sample_education,
@@ -334,7 +337,7 @@ class TestPendingResume:
             for i in range(5)
         ]
 
-        resume = PendingResume(
+        resume = BengtResume(
             header=sample_header,
             experiences=sample_experiences,
             education=sample_education,
@@ -367,7 +370,7 @@ class TestPendingResume:
             )
         ]
 
-        resume = PendingResume(
+        resume = BengtResume(
             header=sample_header,
             experiences=experiences,
             education=sample_education,
