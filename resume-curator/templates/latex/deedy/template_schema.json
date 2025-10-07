@@ -1,0 +1,225 @@
+{
+  "_metadata": {
+    "description": "Template schema for Deedy two-column LaTeX resume with character limits",
+    "template_type": "two_column",
+    "character_limits": {
+      "left_column": {
+        "width_percentage": 33,
+        "skills_per_line": 45,
+        "coursework_per_line": 45,
+        "links_per_line": 40,
+        "note": "Left column is narrower, stricter character limits"
+      },
+      "right_column": {
+        "width_percentage": 66,
+        "experience_bullets": {
+          "chars_per_line": 95,
+          "can_wrap": true,
+          "note": "Each bullet can span multiple lines at 95 chars per line"
+        },
+        "research_description": {
+          "chars_per_line": 95,
+          "can_wrap": true,
+          "note": "Research descriptions can span multiple lines at 95 chars per line"
+        }
+      },
+      "skills": {
+        "can_wrap": true,
+        "chars_per_line": 45,
+        "note": "Skills in left column can wrap to multiple lines"
+      }
+    }
+  },
+  "profile": {
+    "first_name": "Debarghya",
+    "last_name": "Das",
+    "website": "debarghyadas.com",
+    "website_link": "http://debarghyadas.com",
+    "social": "fb.co/dd",
+    "social_link": "http://fb.co/dd",
+    "email": "deedy@fb.com",
+    "phone": "607.379.5733",
+    "email_alt": "dd367@cornell.edu"
+  },
+  "education": [
+    {
+      "school": "Cornell University",
+      "degree": "MEng in Computer Science",
+      "location": "Ithaca, NY",
+      "graduation_date": "Dec 2014",
+      "details": []
+    },
+    {
+      "school": "Cornell University",
+      "degree": "BS in Computer Science",
+      "location": "Ithaca, NY",
+      "graduation_date": "May 2014",
+      "details": [
+        "College of Engineering",
+        "Magna Cum Laude",
+        "Cum. GPA: 3.83 / 4.0",
+        "Major GPA: 3.9 / 4.0"
+      ]
+    },
+    {
+      "school": "La Martiniere for Boys",
+      "degree": "",
+      "location": "Kolkata, India",
+      "graduation_date": "May 2011",
+      "details": []
+    }
+  ],
+  "links": {
+    "facebook": "dd",
+    "github": "deedydas",
+    "linkedin": "debarghyadas",
+    "youtube": "DeedyDash007",
+    "twitter": "@debarghya_das",
+    "quora": "Debarghya-Das"
+  },
+  "coursework": {
+    "graduate": [
+      "Advanced Machine Learning",
+      "Open Source Software Engineering",
+      "Advanced Interactive Graphics",
+      "Compilers + Practicum",
+      "Cloud Computing",
+      "Evolutionary Computation",
+      "Defending Computer Networks",
+      "Machine Learning"
+    ],
+    "undergraduate": [
+      "Information Retrieval",
+      "Operating Systems",
+      "Artificial Intelligence + Practicum",
+      "Functional Programming",
+      "Computer Graphics + Practicum",
+      "Unix Tools and Scripting"
+    ],
+    "_char_limit_per_line": 45
+  },
+  "skills": {
+    "programming": {
+      "expert": {
+        "label": "Over 5000 lines:",
+        "items": ["Java", "Shell", "Python", "Javascript", "OCaml", "Matlab", "Rails", "LaTeX"]
+      },
+      "proficient": {
+        "label": "Over 1000 lines:",
+        "items": ["C", "C++", "CSS", "PHP", "Assembly"]
+      },
+      "familiar": {
+        "label": "Familiar:",
+        "items": ["AS3", "iOS", "Android", "MySQL"]
+      }
+    },
+    "_char_limit_per_line": 45
+  },
+  "experience": [
+    {
+      "company": "Facebook",
+      "position": "Software Engineer",
+      "location": "New York, NY",
+      "dates": "Jan 2015 - Present",
+      "bullets": [],
+      "_char_limit_per_line": 95
+    },
+    {
+      "company": "Coursera",
+      "position": "KPCB Fellow + Software Engineering Intern",
+      "location": "Mountain View, CA",
+      "dates": "June 2014 – Sep 2014",
+      "bullets": [
+        "52 out of 2500 applicants chosen to be a KPCB Fellow 2014.",
+        "Led and shipped Yoda - the admin interface for the new Phoenix platform.",
+        "Full-stack developer - Wrote and reviewed code for JS using Backbone, Jade, Stylus and Require and Scala using Play"
+      ],
+      "_char_limit_per_line": 95
+    },
+    {
+      "company": "Google",
+      "position": "Software Engineering Intern",
+      "location": "Mountain View, CA",
+      "dates": "May 2013 – Aug 2013",
+      "bullets": [
+        "Worked on the YouTube Captions team, in Javascript and Python to plan, to design and develop the full stack to add and edit Automatic Speech Recognition captions. In production.",
+        "Created a backbone.js-like framework for the Captions editor."
+      ],
+      "_char_limit_per_line": 95
+    },
+    {
+      "company": "Phabricator",
+      "position": "Open Source Contributor & Team Leader",
+      "location": "Palo Alto, CA & Ithaca, NY",
+      "dates": "Jan 2013 – May 2013",
+      "bullets": [
+        "Phabricator is used daily by Facebook, Dropbox, Quora, Asana and more.",
+        "I created the Meme generator and more in PHP and Shell.",
+        "Led a team from MIT, Cornell, IC London and UHelsinki for the project."
+      ],
+      "_char_limit_per_line": 95
+    }
+  ],
+  "research": [
+    {
+      "institution": "Cornell Robot Learning Lab",
+      "position": "Researcher",
+      "location": "Ithaca, NY",
+      "dates": "Jan 2014 – Jan 2015",
+      "description": "Worked with Ashesh Jain and Prof Ashutosh Saxena to create PlanIt, a tool which learns from large scale user preference feedback to plan robot trajectories in human environments.",
+      "_char_limit_per_line": 95
+    },
+    {
+      "institution": "Cornell Phonetics Lab",
+      "position": "Head Undergraduate Researcher",
+      "location": "Ithaca, NY",
+      "dates": "Mar 2012 – May 2013",
+      "description": "Led the development of QuickTongue, the first ever breakthrough tongue-controlled game with Prof Sam Tilsen to aid in Linguistics research.",
+      "_char_limit_per_line": 95
+    }
+  ],
+  "awards": [
+    {
+      "year": "2014",
+      "rank": "top 52/2500",
+      "description": "KPCB Engineering Fellow"
+    },
+    {
+      "year": "2014",
+      "rank": "1st/50",
+      "description": "Microsoft Coding Competition, Cornell"
+    },
+    {
+      "year": "2013",
+      "rank": "National",
+      "description": "Jump Trading Challenge Finalist"
+    },
+    {
+      "year": "2013",
+      "rank": "7th/120",
+      "description": "CS 3410 Cache Race Bot Tournament"
+    },
+    {
+      "year": "2012",
+      "rank": "2nd/150",
+      "description": "CS 3110 Biannual Intra-Class Bot Tournament"
+    },
+    {
+      "year": "2011",
+      "rank": "National",
+      "description": "Indian National Mathematics Olympiad (INMO) Finalist"
+    }
+  ],
+  "publications": [
+    {
+      "authors": "A. Jain, D. Das, and A. Saxena",
+      "title": "Planit: A crowdsourcing approach for learning to plan paths from large scale preference feedback",
+      "venue": "Tech Report, ICRA, in press"
+    },
+    {
+      "authors": "S. Tilsen, D. Das, and B. McKee",
+      "title": "Real-time articulatory biofeedback with electromagnetic articulography",
+      "venue": "Linguistics Vanguard, in press"
+    }
+  ]
+}

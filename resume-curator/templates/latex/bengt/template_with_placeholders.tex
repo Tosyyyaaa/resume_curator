@@ -1,0 +1,80 @@
+\documentclass[]{resume-openfont}
+
+\pagestyle{fancy}
+\resetHeaderAndFooter
+
+%--------------------------------------------------------------
+% Convenience command - make it easy to fill template
+
+% Create job position command. Parameters: company, position, location, when
+\newcommand{\resumeHeading}[4]{\runsubsection{\uppercase{#1}}\descript{ | #2}\hfill\location{#3 | #4}\fakeNewLine}
+
+% Create education heading. Parameters: Name, degree, location, when
+\newcommand{\educationHeading}[4]{\runsubsection{#1}\hspace*{\fill}  \location{#3 | #4}\\
+\descript{#2}\fakeNewLine}
+
+% Create project heading. Parameters: Name, link, Tech stack
+\newcommand{\projectHeading}[3]{\Project{#1}{#2}
+\descript{#3}\\}
+
+\newcommand{\projectHeadingWithDate}[4]{\Project{#1}{#2}
+\descript{#3 | #4}\\}
+
+% Parameters: courses
+\newcommand{\modules}[1]{\textbf{Modules:} #1}
+
+% Parameters: courses
+\newcommand{\teacherAssistant}[1]{\textbf{Teacher Assistant (TA):} #1}
+
+%--------------------------------------------------------------
+\begin{document}
+
+%--------------------------------------------------------------
+%     Profile
+%--------------------------------------------------------------
+\newcommand{\yourName}{{{NAME}}}
+\newcommand{\yourEmail}{{{EMAIL}}}
+\newcommand{\yourPhone}{{{PHONE}}}
+\newcommand{\githubUserName}{{{GITHUB}}}
+\newcommand{\linkedInUserName}{{{LINKEDIN}}}
+
+\begin{center}
+    \Huge \scshape \latoRegular{\yourName} \\ \vspace{1pt}
+    \small \href{mailto:\yourEmail}{\underline{\yourEmail}}  $|$  \yourPhone $|$
+    \href{https://github.com/\githubUserName}{\underline{github/\githubUserName}} $|$
+    \href{https://www.linkedin.com/in/\linkedInUserName}{\underline{linkedin/\linkedInUserName}}
+\end{center}
+
+%--------------------------------------------------------------
+%     Education
+%--------------------------------------------------------------
+\section{Education}
+{{EDUCATION_SECTION}}
+
+%--------------------------------------------------------------
+%     Experience
+%--------------------------------------------------------------
+\section{Experience}
+{{EXPERIENCE_SECTION}}
+
+%--------------------------------------------------------------
+%     Projects
+%--------------------------------------------------------------
+\section{Projects}
+\sectionsep
+
+{{PROJECTS_SECTION}}
+
+%--------------------------------------------------------------
+%     Skills
+%--------------------------------------------------------------
+\section{Skills}
+
+\begin{skillList}
+    \doubleItem{{{SKILLS_ROW1_LEFT_LABEL}}}{{{SKILLS_ROW1_LEFT_VALUE}}}%
+    {{{SKILLS_ROW1_RIGHT_LABEL}}}{{{SKILLS_ROW1_RIGHT_VALUE}}}
+    \\
+    \doubleItem{{{SKILLS_ROW2_LEFT_LABEL}}}{{{SKILLS_ROW2_LEFT_VALUE}}}%
+    {{{SKILLS_ROW2_RIGHT_LABEL}}}{{{SKILLS_ROW2_RIGHT_VALUE}}}
+\end{skillList}
+\end{document}

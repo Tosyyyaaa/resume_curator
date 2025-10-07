@@ -2,9 +2,125 @@
     "projects": [
         {
             "name": "Image Captioning",
-            "description": "Image captioning using a transformer model, 90% accuracy against HumanEval benchmark",
+            "description": ["Image captioning using a transformer model, 90% accuracy against HumanEval benchmark"],
             "start_date": "2020",
-            "end_date": "2021"
+            "end_date": "2021",
+            "languages": ["Python"],
+            "frameworks": ["PyTorch, CV2"],
+            "tools": []
+        },
+        {
+            "name": "Neural Architecture Search for Edge Devices",
+            "description": [
+                "Developed AutoML framework discovering optimal CNN architectures for mobile deployment",
+                "Achieved 40% reduction in model size while maintaining 95% accuracy on ImageNet",
+                "Deployed models running at 60 FPS on iPhone and Android devices"
+            ],
+            "start_date": "2023",
+            "end_date": "2024",
+            "languages": ["Python", "Swift", "Kotlin"],
+            "frameworks": ["PyTorch", "CoreML", "TensorFlow Lite"],
+            "tools": ["Weights & Biases", "GitHub Actions"]
+        },
+        {
+            "name": "Real-time Sign Language Translator",
+            "description": [
+                "Built end-to-end system translating ASL to text using computer vision and NLP",
+                "Collected and annotated dataset of 50K+ sign language gestures",
+                "Achieved 92% accuracy with 30ms latency on consumer webcams"
+            ],
+            "start_date": "2022",
+            "end_date": "2023",
+            "languages": ["Python", "JavaScript"],
+            "frameworks": ["MediaPipe", "BERT", "FastAPI", "React"],
+            "tools": ["Docker", "PostgreSQL"]
+        },
+        {
+            "name": "Distributed Training Framework",
+            "description": [
+                "Created open-source library for distributed deep learning across heterogeneous GPUs",
+                "Implemented gradient compression reducing communication overhead by 75%",
+                "Used by 500+ researchers with 2K+ GitHub stars"
+            ],
+            "start_date": "2021",
+            "end_date": "2022",
+            "languages": ["Python", "C++", "CUDA"],
+            "frameworks": ["PyTorch", "NCCL", "MPI"],
+            "tools": ["CMake", "Docker", "GitHub"]
+        },
+        {
+            "name": "Music Generation with GANs",
+            "description": [
+                "Implemented WaveGAN and MuseGAN for generating realistic music samples",
+                "Fine-tuned models on classical, jazz, and electronic music achieving MOS score of 3.8/5"
+            ],
+            "start_date": "2021",
+            "end_date": "2021",
+            "languages": ["Python"],
+            "frameworks": ["PyTorch", "librosa"],
+            "tools": ["Jupyter", "Tensorboard"]
+        },
+        {
+            "name": "Smart Home Energy Optimizer",
+            "description": [
+                "Built IoT system using reinforcement learning to reduce household energy consumption by 35%",
+                "Integrated with Nest, Philips Hue, and Tesla Powerwall APIs",
+                "Deployed on Raspberry Pi with real-time monitoring dashboard"
+            ],
+            "start_date": "2020",
+            "end_date": "2021",
+            "languages": ["Python", "JavaScript"],
+            "frameworks": ["TensorFlow", "Flask", "Vue.js"],
+            "tools": ["Raspberry Pi", "MQTT", "InfluxDB"]
+        },
+        {
+            "name": "Code Review Assistant",
+            "description": [
+                "Fine-tuned CodeBERT model to detect bugs and suggest improvements in pull requests",
+                "Integrated with GitHub API processing 1K+ PRs across 50 repositories"
+            ],
+            "start_date": "2023",
+            "end_date": "Present",
+            "languages": ["Python", "TypeScript"],
+            "frameworks": ["Transformers", "FastAPI", "Next.js"],
+            "tools": ["GitHub Actions", "Docker", "Redis"]
+        },
+        {
+            "name": "3D Object Reconstruction from Images",
+            "description": [
+                "Implemented NeRF (Neural Radiance Fields) for photorealistic 3D scene reconstruction",
+                "Optimized training pipeline reducing rendering time from 2 hours to 15 minutes"
+            ],
+            "start_date": "2022",
+            "end_date": "2022",
+            "languages": ["Python", "CUDA"],
+            "frameworks": ["PyTorch", "OpenCV"],
+            "tools": ["Blender", "Weights & Biases"]
+        },
+        {
+            "name": "Sentiment Analysis API",
+            "description": [
+                "Deployed BERT-based sentiment classifier as RESTful API handling 10K requests/day",
+                "Achieved 94% F1 score on custom e-commerce review dataset"
+            ],
+            "start_date": "2020",
+            "end_date": "2020",
+            "languages": ["Python"],
+            "frameworks": ["Transformers", "FastAPI", "Scikit-learn"],
+            "tools": ["Docker", "AWS EC2", "PostgreSQL"]
+        },
+        {
+            "name": "Autonomous Drone Navigation",
+            "description": [
+                "Trained deep RL agent enabling drone to navigate obstacle courses autonomously",
+                "Simulated in Gazebo and deployed on DJI Tello achieving 85% success rate",
+                "Presented findings at university robotics symposium"
+            ],
+            "start_date": "2019",
+            "end_date": "2020",
+            "languages": ["Python", "C++"],
+            "frameworks": ["Stable Baselines3", "ROS", "OpenCV"],
+            "tools": ["Gazebo", "DJI SDK"]
         }
     ]
 }
